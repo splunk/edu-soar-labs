@@ -4,7 +4,7 @@
     "category": "Uncategorized",
     "coa": {
         "data": {
-            "description": "",
+            "description": "This is the solution playbook for lab 4. This ES playbook extracts a url from the dest field, triggers the lookup playbook from lab 3 and then takes appropriate action to either *close* the finding or set it to *in progress*.",
             "edges": [
                 {
                     "id": "port_3_to_port_4",
@@ -68,7 +68,7 @@
                     "targetPort": "9_in"
                 }
             ],
-            "hash": "810f6291277bc06efe9041943b43cdd868ff9142",
+            "hash": "853a903139a331e71055a35d8a90c334661a839f",
             "nodes": {
                 "0": {
                     "data": {
@@ -84,7 +84,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 340
+                    "y": 399.9999999999999
                 },
                 "1": {
                     "data": {
@@ -100,7 +100,7 @@
                     "type": "end",
                     "warnings": {},
                     "x": 1000,
-                    "y": 1200
+                    "y": 1260
                 },
                 "3": {
                     "data": {
@@ -108,7 +108,7 @@
                             "join": []
                         },
                         "functionId": 1,
-                        "functionName": "playbook_Lookup_url_in_ES_http_intel_collection_1",
+                        "functionName": "playbook_Lookup_url_in_ES_http_intel_collection_Solution_1",
                         "id": "3",
                         "inputs": {
                             "url": {
@@ -127,9 +127,9 @@
                             "pauseUnit": "m",
                             "pauseValue": 2
                         },
-                        "playbookName": "Lookup url in ES http_intel collection",
-                        "playbookRepo": 2,
-                        "playbookRepoName": "local",
+                        "playbookName": "Lookup url in ES http_intel collection Solution",
+                        "playbookRepo": 3,
+                        "playbookRepoName": "conf25",
                         "playbookType": "data",
                         "synchronous": true,
                         "type": "playbook"
@@ -139,7 +139,7 @@
                     "type": "playbook",
                     "warnings": {},
                     "x": 980,
-                    "y": 640
+                    "y": 620
                 },
                 "4": {
                     "data": {
@@ -152,7 +152,7 @@
                                     {
                                         "conditionIndex": 0,
                                         "op": "==",
-                                        "param": "playbook_lookup_url_in_es_http_intel_collection_1:playbook_output:threat_key",
+                                        "param": "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key",
                                         "value": "None"
                                     }
                                 ],
@@ -239,7 +239,7 @@
                     "type": "enterpriseSecurity",
                     "warnings": {},
                     "x": 1260,
-                    "y": 960
+                    "y": 900
                 },
                 "6": {
                     "data": {
@@ -286,7 +286,7 @@
                     "type": "enterpriseSecurity",
                     "warnings": {},
                     "x": 720,
-                    "y": 960
+                    "y": 900
                 },
                 "7": {
                     "data": {
@@ -331,7 +331,7 @@
                     "type": "enterpriseSecurity",
                     "warnings": {},
                     "x": 1260,
-                    "y": 1124.5
+                    "y": 1064.5
                 },
                 "8": {
                     "data": {
@@ -344,7 +344,7 @@
                         "inputs": {
                             "url": {
                                 "datapaths": [
-                                    "finding:consolidated_findings.dest"
+                                    "finding:consolidated_findings._raw"
                                 ],
                                 "deduplicate": false
                             }
@@ -359,8 +359,8 @@
                             "pauseValue": 2
                         },
                         "playbookName": "String_split_extract_url",
-                        "playbookRepo": 5,
-                        "playbookRepoName": "preconf",
+                        "playbookRepo": 3,
+                        "playbookRepoName": "conf25",
                         "playbookType": "data",
                         "synchronous": true,
                         "type": "playbook"
@@ -416,10 +416,10 @@
                     "type": "enterpriseSecurity",
                     "warnings": {},
                     "x": 1260,
-                    "y": 1260
+                    "y": 1200
                 }
             },
-            "notes": "",
+            "notes": "This is the solution playbook for lab 4. This ES playbook extracts a url from the dest field, triggers the lookup playbook from lab 3 and then takes appropriate action to either *close* the finding or set it to *in progress*.",
             "origin": {
                 "playbook_id": 214,
                 "playbook_name": "ES Suspicious HTTP Finding",
@@ -435,7 +435,7 @@
         "schema": "5.0.20",
         "version": "6.4.1.361"
     },
-    "create_time": "2025-07-23T05:40:57.472618+00:00",
+    "create_time": "2025-08-28T14:55:01.897930+00:00",
     "draft_mode": false,
     "labels": [
         "es_soar_integration"

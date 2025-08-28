@@ -1,5 +1,5 @@
 """
-
+This is the solution playbook for lab 4. This ES playbook extracts a url from the dest field, triggers the lookup playbook from lab 3 and then takes appropriate action to either *close* the finding or set it to *in progress*.
 """
 
 
@@ -18,8 +18,8 @@ def on_start(container):
     return
 
 @phantom.playbook_block()
-def playbook_lookup_url_in_es_http_intel_collection_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("playbook_lookup_url_in_es_http_intel_collection_1() called")
+def playbook_lookup_url_in_es_http_intel_collection_solution_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("playbook_lookup_url_in_es_http_intel_collection_solution_1() called")
 
     playbook_string_split_extract_url_1_output_url = phantom.collect2(container=container, datapath=["playbook_string_split_extract_url_1:playbook_output:url"])
 
@@ -39,8 +39,8 @@ def playbook_lookup_url_in_es_http_intel_collection_1(action=None, success=None,
     ## Custom Code End
     ################################################################################
 
-    # call playbook "local/Lookup url in ES http_intel collection", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("local/Lookup url in ES http_intel collection", container=container, name="playbook_lookup_url_in_es_http_intel_collection_1", callback=decision_1, inputs=inputs)
+    # call playbook "conf25/Lookup url in ES http_intel collection Solution", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("conf25/Lookup url in ES http_intel collection Solution", container=container, name="playbook_lookup_url_in_es_http_intel_collection_solution_1", callback=decision_1, inputs=inputs)
 
     return
 
@@ -53,10 +53,10 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     found_match_1 = phantom.decision(
         container=container,
         conditions=[
-            ["playbook_lookup_url_in_es_http_intel_collection_1:playbook_output:threat_key", "==", None]
+            ["playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key", "==", None]
         ],
         conditions_dps=[
-            ["playbook_lookup_url_in_es_http_intel_collection_1:playbook_output:threat_key", "==", None]
+            ["playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key", "==", None]
         ],
         name="decision_1:condition_1",
         delimiter=None)
@@ -180,12 +180,12 @@ def create_risk_modifier_of_a_risk_entity_1(action=None, success=None, container
 def playbook_string_split_extract_url_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_string_split_extract_url_1() called")
 
-    finding_data = phantom.collect2(container=container, datapath=["finding:consolidated_findings.dest"])
+    finding_data = phantom.collect2(container=container, datapath=["finding:consolidated_findings._raw"])
 
-    finding_consolidated_findings_dest = [item[0] for item in finding_data]
+    finding_consolidated_findings__raw = [item[0] for item in finding_data]
 
     inputs = {
-        "url": finding_consolidated_findings_dest,
+        "url": finding_consolidated_findings__raw,
     }
 
     ################################################################################
@@ -198,8 +198,8 @@ def playbook_string_split_extract_url_1(action=None, success=None, container=Non
     ## Custom Code End
     ################################################################################
 
-    # call playbook "preconf/String_split_extract_url", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("preconf/String_split_extract_url", container=container, name="playbook_string_split_extract_url_1", callback=playbook_lookup_url_in_es_http_intel_collection_1, inputs=inputs)
+    # call playbook "conf25/String_split_extract_url", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("conf25/String_split_extract_url", container=container, name="playbook_string_split_extract_url_1", callback=playbook_lookup_url_in_es_http_intel_collection_solution_1, inputs=inputs)
 
     return
 
@@ -218,8 +218,8 @@ def update_disposition(action=None, success=None, container=None, results=None, 
     for finding_data_item in finding_data:
         if finding_data_item[0] is not None:
             parameters.append({
-                "disposition": "True Positive - Suspicious Activity",
                 "id": finding_data_item[0],
+                "disposition": "True Positive - Suspicious Activity",
             })
 
     ################################################################################

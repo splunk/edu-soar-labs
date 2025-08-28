@@ -4,7 +4,7 @@
     "category": "Uncategorized",
     "coa": {
         "data": {
-            "description": "",
+            "description": "This is the solution playbook for lab 6. This playbook uses both input playbooks you created in lab 3 and 5.  It also uses a prompt block to let the analyst choose to add the url to the http_intel list.",
             "edges": [
                 {
                     "id": "port_2_to_port_3",
@@ -151,7 +151,7 @@
                     "targetPort": "2_in"
                 }
             ],
-            "hash": "678267a3370186aa4c8931b4711f7d6006710df0",
+            "hash": "3164aeae1c86a4cf1c6d9f91d3c8f95d8e20cae3",
             "nodes": {
                 "0": {
                     "data": {
@@ -167,7 +167,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 299.99999999999983
+                    "y": 339.9999999999999
                 },
                 "1": {
                     "data": {
@@ -183,7 +183,7 @@
                     "type": "end",
                     "warnings": {},
                     "x": 800,
-                    "y": 2340
+                    "y": 2240
                 },
                 "10": {
                     "data": {
@@ -245,7 +245,7 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 1380,
-                    "y": 1340
+                    "y": 1320
                 },
                 "11": {
                     "data": {
@@ -327,7 +327,7 @@
                             "join": []
                         },
                         "functionId": 1,
-                        "functionName": "playbook_Create_record_for_http_intel_collection_1",
+                        "functionName": "playbook_Create_record_for_http_intel_collection_Solution_1",
                         "id": "13",
                         "inputs": {
                             "threat key": {
@@ -344,7 +344,7 @@
                             },
                             "url": {
                                 "datapaths": [
-                                    "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_input:url"
+                                    "playbook_string_split_extract_url_1:playbook_output:url"
                                 ],
                                 "deduplicate": false
                             }
@@ -358,9 +358,9 @@
                             "pauseUnit": "m",
                             "pauseValue": 2
                         },
-                        "playbookName": "Create record for http_intel collection",
-                        "playbookRepo": 4,
-                        "playbookRepoName": "preconf",
+                        "playbookName": "Create record for http_intel collection Solution",
+                        "playbookRepo": 3,
+                        "playbookRepoName": "conf25",
                         "playbookType": "data",
                         "synchronous": true,
                         "type": "playbook"
@@ -370,7 +370,7 @@
                     "type": "playbook",
                     "warnings": {},
                     "x": 780,
-                    "y": 2140
+                    "y": 2100
                 },
                 "14": {
                     "data": {
@@ -412,7 +412,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 780,
-                    "y": 1680
+                    "y": 1660
                 },
                 "16": {
                     "data": {
@@ -920,7 +920,7 @@
                             "join": []
                         },
                         "functionId": 1,
-                        "functionName": "playbook_Lookup_url_in_ES_http_intel_collection_for_recording_1",
+                        "functionName": "playbook_Lookup_url_in_ES_http_intel_collection_Solution_1",
                         "id": "2",
                         "inputs": {
                             "url": {
@@ -939,9 +939,9 @@
                             "pauseUnit": "m",
                             "pauseValue": 2
                         },
-                        "playbookName": "Lookup url in ES http_intel collection for recording",
-                        "playbookRepo": 2,
-                        "playbookRepoName": "local",
+                        "playbookName": "Lookup url in ES http_intel collection Solution",
+                        "playbookRepo": 3,
+                        "playbookRepoName": "conf25",
                         "playbookType": "data",
                         "synchronous": true,
                         "type": "playbook"
@@ -979,8 +979,8 @@
                             "pauseValue": 2
                         },
                         "playbookName": "String_split_extract_url",
-                        "playbookRepo": 4,
-                        "playbookRepoName": "preconf",
+                        "playbookRepo": 3,
+                        "playbookRepoName": "conf25",
                         "playbookType": "data",
                         "synchronous": true,
                         "type": "playbook"
@@ -990,7 +990,7 @@
                     "type": "playbook",
                     "warnings": {},
                     "x": 980,
-                    "y": 424.4999999999999
+                    "y": 460
                 },
                 "3": {
                     "data": {
@@ -1149,7 +1149,7 @@
                         "values": {
                             "debug": {
                                 "input_1": [
-                                    "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:threat_key"
+                                    "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key"
                                 ],
                                 "input_10": null,
                                 "input_2": null,
@@ -1181,8 +1181,8 @@
                                     {
                                         "conditionIndex": 0,
                                         "op": "==",
-                                        "param": "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:threat_key",
-                                        "value": ""
+                                        "param": "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key",
+                                        "value": "None"
                                     }
                                 ],
                                 "conditionIndex": 0,
@@ -1219,7 +1219,7 @@
                     "type": "decision",
                     "warnings": {},
                     "x": 1060,
-                    "y": 800
+                    "y": 780
                 },
                 "6": {
                     "data": {
@@ -1232,9 +1232,9 @@
                         "functionName": "format_warning_msg",
                         "id": "6",
                         "parameters": [
-                            "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_input:url",
-                            "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:threat_key",
-                            "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:date_created"
+                            "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_input:url",
+                            "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key",
+                            "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:date_created"
                         ],
                         "template": "WARNING! URL Found in http_intel threat list!!!\n\nURL: {0}\nThreat Key: {1}\nTime Created: {2}",
                         "type": "format"
@@ -1315,7 +1315,7 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 1380,
-                    "y": 1215.5
+                    "y": 1200
                 },
                 "8": {
                     "data": {
@@ -1328,7 +1328,7 @@
                         "functionName": "format_url_not_found_msg",
                         "id": "8",
                         "parameters": [
-                            "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_input:url"
+                            "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_input:url"
                         ],
                         "template": "URL not found in http_intel threat list.\n\nURL: {0}",
                         "type": "format"
@@ -1412,7 +1412,7 @@
                     "y": 1080
                 }
             },
-            "notes": "",
+            "notes": "This is the solution playbook for lab 6. This playbook uses both input playbooks you created in lab 3 and 5.  It also uses a prompt block to let the analyst choose to add the url to the http_intel list.",
             "origin": {
                 "playbook_id": 181,
                 "playbook_name": "Investigate Suspicious URL",
@@ -1428,7 +1428,7 @@
         "schema": "5.0.20",
         "version": "6.4.1.361"
     },
-    "create_time": "2025-07-23T03:55:20.263580+00:00",
+    "create_time": "2025-08-28T14:38:24.322721+00:00",
     "draft_mode": false,
     "labels": [
         "*"

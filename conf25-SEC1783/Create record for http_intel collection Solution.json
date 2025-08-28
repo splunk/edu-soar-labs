@@ -1,0 +1,246 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "This is the solution playbook for lab 5. This playbook receives url, threat key, and date created as input.  It will create a record in the http_intel collection with the inputs.",
+            "edges": [
+                {
+                    "id": "port_0_to_port_3",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "id": "port_4_to_port_6",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                },
+                {
+                    "id": "port_6_to_port_7",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "id": "port_7_to_port_1",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "935119918c382f2f4b8a61cb43a66ca24b6a98c9",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 419.99999999999955
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 1020
+                },
+                "3": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format JSON for HTTP intel record",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_json_for_http_intel_record",
+                        "id": "3",
+                        "parameters": [
+                            "playbook_input:url",
+                            "playbook_input:threat_key",
+                            "playbook_input:time"
+                        ],
+                        "template": "{{\"_key\": \"{0}\", \"url\": \"{0}\", \"threat_key\": \"{1}\", \"time\": {2} }}",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 520
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "format endpoint to update collection",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "format_endpoint_to_update_collection",
+                        "id": "4",
+                        "parameters": [],
+                        "template": "storage/collections/data/http_intel",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 640
+                },
+                "6": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format headers",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 5,
+                        "functionName": "format_headers",
+                        "id": "6",
+                        "parameters": [],
+                        "template": "{\"Content-Type\": \"application/json\"}\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 760
+                },
+                "7": {
+                    "data": {
+                        "action": "post data",
+                        "actionType": "generic",
+                        "advanced": {
+                            "customName": "Update HTTP intel with new threat",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "HTTP",
+                        "connectorConfigs": [
+                            "splunk es"
+                        ],
+                        "connectorId": "290b7499-0374-4930-9cdc-5e9b05d65827",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "update_http_intel_with_new_threat",
+                        "id": "7",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "parameters": {
+                            "body": "format_json_for_http_intel_record:formatted_data",
+                            "headers": "format_headers:formatted_data",
+                            "location": "format_endpoint_to_update_collection:formatted_data",
+                            "verify_certificate": false
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "location"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 880
+                }
+            },
+            "notes": "This is the solution playbook for lab 5. This playbook receives url, threat key, and date created as input.  It will create a record in the http_intel collection with the inputs.",
+            "origin": {
+                "playbook_id": 161,
+                "playbook_name": "Create record for http_intel collection",
+                "playbook_repo_id": 3,
+                "playbook_repo_name": "conf25"
+            }
+        },
+        "input_spec": [
+            {
+                "contains": [
+                    "url"
+                ],
+                "description": "Provide URL",
+                "name": "url"
+            },
+            {
+                "contains": [],
+                "description": "Provide threat key",
+                "name": "threat key"
+            },
+            {
+                "contains": [],
+                "description": "provide the time value here",
+                "name": "time"
+            }
+        ],
+        "output_spec": [
+            {
+                "contains": [],
+                "datapaths": [
+                    "update_http_intel_with_new_threat:action_result.summary.status_code"
+                ],
+                "deduplicate": false,
+                "description": "this will return succes or failure",
+                "metadata": {},
+                "name": "update kv store status"
+            }
+        ],
+        "playbook_trigger": "artifact_created",
+        "playbook_type": "data",
+        "python_version": "3.9",
+        "schema": "5.0.20",
+        "version": "6.4.1.361"
+    },
+    "create_time": "2025-08-28T14:32:57.384820+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}

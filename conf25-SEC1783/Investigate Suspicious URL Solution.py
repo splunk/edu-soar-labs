@@ -1,5 +1,5 @@
 """
-
+This is the solution playbook for lab 6. This playbook uses both input playbooks you created in lab 3 and 5.  It also uses a prompt block to let the analyst choose to add the url to the http_intel list.
 """
 
 
@@ -18,8 +18,8 @@ def on_start(container):
     return
 
 @phantom.playbook_block()
-def playbook_lookup_url_in_es_http_intel_collection_for_recording_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("playbook_lookup_url_in_es_http_intel_collection_for_recording_1() called")
+def playbook_lookup_url_in_es_http_intel_collection_solution_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("playbook_lookup_url_in_es_http_intel_collection_solution_1() called")
 
     playbook_string_split_extract_url_1_output_url = phantom.collect2(container=container, datapath=["playbook_string_split_extract_url_1:playbook_output:url"])
 
@@ -39,15 +39,15 @@ def playbook_lookup_url_in_es_http_intel_collection_for_recording_1(action=None,
     ## Custom Code End
     ################################################################################
 
-    # call playbook "local/Lookup url in ES http_intel collection for recording", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("local/Lookup url in ES http_intel collection for recording", container=container, name="playbook_lookup_url_in_es_http_intel_collection_for_recording_1", callback=playbook_lookup_url_in_es_http_intel_collection_for_recording_1_callback, inputs=inputs)
+    # call playbook "conf25/Lookup url in ES http_intel collection Solution", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("conf25/Lookup url in ES http_intel collection Solution", container=container, name="playbook_lookup_url_in_es_http_intel_collection_solution_1", callback=playbook_lookup_url_in_es_http_intel_collection_solution_1_callback, inputs=inputs)
 
     return
 
 
 @phantom.playbook_block()
-def playbook_lookup_url_in_es_http_intel_collection_for_recording_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("playbook_lookup_url_in_es_http_intel_collection_for_recording_1_callback() called")
+def playbook_lookup_url_in_es_http_intel_collection_solution_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("playbook_lookup_url_in_es_http_intel_collection_solution_1_callback() called")
 
     
     debug_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=filtered_artifacts, filtered_results=filtered_results)
@@ -61,14 +61,14 @@ def playbook_lookup_url_in_es_http_intel_collection_for_recording_1_callback(act
 def debug_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("debug_1() called")
 
-    playbook_lookup_url_in_es_http_intel_collection_for_recording_1_output_threat_key = phantom.collect2(container=container, datapath=["playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:threat_key"])
+    playbook_lookup_url_in_es_http_intel_collection_solution_1_output_threat_key = phantom.collect2(container=container, datapath=["playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key"])
 
-    playbook_lookup_url_in_es_http_intel_collection_for_recording_1_output_threat_key_values = [item[0] for item in playbook_lookup_url_in_es_http_intel_collection_for_recording_1_output_threat_key]
+    playbook_lookup_url_in_es_http_intel_collection_solution_1_output_threat_key_values = [item[0] for item in playbook_lookup_url_in_es_http_intel_collection_solution_1_output_threat_key]
 
     parameters = []
 
     parameters.append({
-        "input_1": playbook_lookup_url_in_es_http_intel_collection_for_recording_1_output_threat_key_values,
+        "input_1": playbook_lookup_url_in_es_http_intel_collection_solution_1_output_threat_key_values,
         "input_2": None,
         "input_3": None,
         "input_4": None,
@@ -103,10 +103,10 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     found_match_1 = phantom.decision(
         container=container,
         conditions=[
-            ["playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:threat_key", "==", ""]
+            ["playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key", "==", None]
         ],
         conditions_dps=[
-            ["playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:threat_key", "==", ""]
+            ["playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key", "==", None]
         ],
         name="decision_1:condition_1",
         delimiter=None)
@@ -130,9 +130,9 @@ def format_warning_msg(action=None, success=None, container=None, results=None, 
 
     # parameter list for template variable replacement
     parameters = [
-        "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_input:url",
-        "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:threat_key",
-        "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_output:date_created"
+        "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_input:url",
+        "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:threat_key",
+        "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_output:date_created"
     ]
 
     ################################################################################
@@ -183,7 +183,7 @@ def format_url_not_found_msg(action=None, success=None, container=None, results=
 
     # parameter list for template variable replacement
     parameters = [
-        "playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_input:url"
+        "playbook_lookup_url_in_es_http_intel_collection_solution_1:playbook_input:url"
     ]
 
     ################################################################################
@@ -319,19 +319,19 @@ def decision_2(action=None, success=None, container=None, results=None, handle=N
 
 
 @phantom.playbook_block()
-def playbook_create_record_for_http_intel_collection_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("playbook_create_record_for_http_intel_collection_1() called")
+def playbook_create_record_for_http_intel_collection_solution_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("playbook_create_record_for_http_intel_collection_solution_1() called")
 
-    playbook_lookup_url_in_es_http_intel_collection_for_recording_1_input_url = phantom.collect2(container=container, datapath=["playbook_lookup_url_in_es_http_intel_collection_for_recording_1:playbook_input:url"])
-    format_time = phantom.get_format_data(name="format_time")
+    playbook_string_split_extract_url_1_output_url = phantom.collect2(container=container, datapath=["playbook_string_split_extract_url_1:playbook_output:url"])
     format_threat_key_value = phantom.get_format_data(name="format_threat_key_value")
+    format_time = phantom.get_format_data(name="format_time")
 
-    playbook_lookup_url_in_es_http_intel_collection_for_recording_1_input_url_values = [item[0] for item in playbook_lookup_url_in_es_http_intel_collection_for_recording_1_input_url]
+    playbook_string_split_extract_url_1_output_url_values = [item[0] for item in playbook_string_split_extract_url_1_output_url]
 
     inputs = {
-        "url": playbook_lookup_url_in_es_http_intel_collection_for_recording_1_input_url_values,
-        "time": format_time,
+        "url": playbook_string_split_extract_url_1_output_url_values,
         "threat_key": format_threat_key_value,
+        "time": format_time,
     }
 
     ################################################################################
@@ -344,15 +344,15 @@ def playbook_create_record_for_http_intel_collection_1(action=None, success=None
     ## Custom Code End
     ################################################################################
 
-    # call playbook "preconf/Create record for http_intel collection", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("preconf/Create record for http_intel collection", container=container, name="playbook_create_record_for_http_intel_collection_1", callback=playbook_create_record_for_http_intel_collection_1_callback, inputs=inputs)
+    # call playbook "conf25/Create record for http_intel collection Solution", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("conf25/Create record for http_intel collection Solution", container=container, name="playbook_create_record_for_http_intel_collection_solution_1", callback=playbook_create_record_for_http_intel_collection_solution_1_callback, inputs=inputs)
 
     return
 
 
 @phantom.playbook_block()
-def playbook_create_record_for_http_intel_collection_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("playbook_create_record_for_http_intel_collection_1_callback() called")
+def playbook_create_record_for_http_intel_collection_solution_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("playbook_create_record_for_http_intel_collection_solution_1_callback() called")
 
     
     # Downstream End block cannot be called directly, since execution will call on_finish automatically.
@@ -560,7 +560,7 @@ def format_time(action=None, success=None, container=None, results=None, handle=
 
     phantom.format(container=container, template=template, parameters=parameters, name="format_time")
 
-    playbook_create_record_for_http_intel_collection_1(container=container)
+    playbook_create_record_for_http_intel_collection_solution_1(container=container)
 
     return
 
@@ -587,8 +587,8 @@ def playbook_string_split_extract_url_1(action=None, success=None, container=Non
     ## Custom Code End
     ################################################################################
 
-    # call playbook "preconf/String_split_extract_url", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("preconf/String_split_extract_url", container=container, name="playbook_string_split_extract_url_1", callback=playbook_lookup_url_in_es_http_intel_collection_for_recording_1, inputs=inputs)
+    # call playbook "conf25/String_split_extract_url", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("conf25/String_split_extract_url", container=container, name="playbook_string_split_extract_url_1", callback=playbook_lookup_url_in_es_http_intel_collection_solution_1, inputs=inputs)
 
     return
 
