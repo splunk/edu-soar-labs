@@ -1,0 +1,15 @@
+SEC-1783 Competition
+
+Once you have completed lab 6, you can create a new HTTP asset using the provided information below. Go back to lab 2 for details on how to use this info to create a new HTTP asset.
+
+Then use lab 6 with your new asset to post (create a record) in http_intel with your url that includes your name or team name as part of the url. First three participants or teams to post will receive a prize. Tell Chris, Kasia, or any one of the Lab Assistants to check the http_intel collection on the asset to confirm.
+
+HTTP asset info:
+
+URL: 
+
+https://conf25-773601-bulk17573953096725-es.students.splunk.education:8089/servicesNS/nobody/DA-ESS-ThreatIntelligence/
+
+Authorization
+
+Bearer eyJraWQiOiJzcGx1bmsuc2VjcmV0IiwiYWxnIjoiSFM1MTIiLCJ2ZXIiOiJ2MiIsInR0eXAiOiJzdGF0aWMifQ.eyJpc3MiOiJhZG1pbiBmcm9tIGVzIiwic3ViIjoic29hcl9zZXJ2aWNlIiwiYXVkIjoiY29uZjI1IiwiaWRwIjoiU3BsdW5rIiwianRpIjoiMmI1MjBkMjUyYWM0ODZhMjdhMDZjYzZiYjZhOTZkM2IxMWQxZDg4M2Q0MDM0YmU0YTZlYjVmMDE2MzJmNGFlMyIsImlhdCI6MTc1NzUxNjc1OSwiZXhwIjoxNzYwMTA4NzU5LCJuYnIiOjE3NTc1MTY3NTl9.YhyLv0DpKL4NLR2JLA3e37eNyvsdnJVxiOzELeEumjY7YOkiHZTHiSXiocG6UUQ8Wf_lHhaqg45ayliiWo5XfA
