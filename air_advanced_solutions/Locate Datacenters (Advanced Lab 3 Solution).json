@@ -1,0 +1,307 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "customCode": null,
+            "description": "",
+            "edges": [
+                {
+                    "id": "port_0_to_port_6",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                },
+                {
+                    "id": "port_6_to_port_5",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_7",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                }
+            ],
+            "globalCustomCode": "\n\n\ndef result_csv(result_list):\n    simple_list = []\n    for item in result_list:\n        simple_list.append(item[0])\n    dedup = list(dict.fromkeys(simple_list))\n    return \", \".join(dedup)",
+            "hash": "ea203e69b52460de53c0e4b1e66507e6c444b778",
+            "nodes": {
+                "0": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {
+                        "input_spec": [
+                            {
+                                "name": "Name is required"
+                            }
+                        ]
+                    },
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 920,
+                    "y": 199.99999999999986
+                },
+                "1": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # Write your custom code here...\n\n",
+                    "warnings": {},
+                    "x": 1220,
+                    "y": 205.9999999999999
+                },
+                "5": {
+                    "data": {
+                        "action": "geolocate ip",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "MaxMind",
+                        "connectorConfigs": [
+                            "maxmind"
+                        ],
+                        "connectorId": "c566e153-3118-4033-abda-14dd9748c91a",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "geolocate_ip_1",
+                        "id": "5",
+                        "loop": {
+                            "conditions": [
+                                {
+                                    "comparisons": [
+                                        {
+                                            "comparisonKey": "comparison_key_0",
+                                            "op": "==",
+                                            "param": "",
+                                            "value": ""
+                                        }
+                                    ],
+                                    "conditionIndex": 0,
+                                    "conditionKey": "condition_key_0",
+                                    "logic": "and",
+                                    "type": "if"
+                                }
+                            ],
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "parameters": {
+                            "ip": "list_demux_1:custom_function_result.data.output"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "ip"
+                            }
+                        ],
+                        "tab": "byConnector",
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 900,
+                    "y": 508
+                },
+                "6": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "list_demux",
+                            "repoName": "community"
+                        },
+                        "functionId": 1,
+                        "functionName": "list_demux_1",
+                        "id": "6",
+                        "loop": {
+                            "conditions": [
+                                {
+                                    "comparisons": [
+                                        {
+                                            "comparisonKey": "comparison_key_0",
+                                            "op": "==",
+                                            "param": "",
+                                            "value": ""
+                                        }
+                                    ],
+                                    "conditionIndex": 0,
+                                    "conditionKey": "condition_key_0",
+                                    "logic": "and",
+                                    "type": "if"
+                                }
+                            ],
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "list_demux": {
+                                "description": "Accepts a single list and converts it into multiple custom function output results. All output will be placed in the \"output\" datapath. Sub-items and sub-item variable names are dependent on the input.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "A list of objects. Nested lists are not unpacked.",
+                                        "inputType": "item",
+                                        "label": "input_list",
+                                        "name": "input_list",
+                                        "placeholder": "[\"list_item_1\", \"list_item_2\", \"list_item_3\"]",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "list_demux",
+                                "name": "list_demux"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "list_demux": {
+                                "input_list": "finding:consolidated_findings.destinationAddress"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 900,
+                    "y": 360
+                },
+                "7": {
+                    "data": {
+                        "action": "set custom fields",
+                        "actionType": "post",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "Enterprise Security",
+                        "connectorConfigs": [
+                            "builtin_mc_connector"
+                        ],
+                        "connectorId": "7e971d03-6ae7-4429-b4e1-cf461003e75b",
+                        "connectorVersion": "v1",
+                        "functionId": 3,
+                        "functionName": "set_custom_fields_3",
+                        "id": "7",
+                        "loop": {
+                            "conditions": [
+                                {
+                                    "comparisons": [
+                                        {
+                                            "comparisonKey": "comparison_key_0",
+                                            "op": "==",
+                                            "param": "",
+                                            "value": ""
+                                        }
+                                    ],
+                                    "conditionIndex": 0,
+                                    "conditionKey": "condition_key_0",
+                                    "logic": "and",
+                                    "type": "if"
+                                }
+                            ],
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "parameters": {
+                            "incident_id": "finding:id",
+                            "pairs": [
+                                {
+                                    "name": "Datacenters",
+                                    "value": "geolocate_ip_1:action_result.data.*.continent_name"
+                                }
+                            ]
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "array",
+                                "field": "pairs"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "",
+                                "field": "incident_id"
+                            }
+                        ],
+                        "type": "enterpriseSecurity"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "enterpriseSecurity",
+                    "userCode": "\n    # Write your custom code here...\n    \n    val = result_csv(geolocate_ip_1_result_data)\n    parameters = []\n    parameters.append({\"pairs\": [{\"name\": \"Datacenters\", \"value\": val },\n                       ],\n                       \"incident_id\": finding_data_item[0],\n                      })\n    \n    \n",
+                    "warnings": {},
+                    "x": 900,
+                    "y": 680
+                }
+            },
+            "notes": "",
+            "origin": {
+                "playbook_id": 245,
+                "playbook_name": "Locate Datacenters (Advanced Solution Lab 3)",
+                "playbook_repo_id": 2,
+                "playbook_repo_name": "local"
+            }
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_trigger": "artifact_created",
+        "playbook_type": "es",
+        "python_version": "3.13",
+        "schema": "5.0.24",
+        "version": "8.5.0.249"
+    },
+    "create_time": "2026-06-09T17:24:04.852473+00:00",
+    "draft_mode": false,
+    "labels": [
+        "es_soar_integration"
+    ],
+    "tags": [
+        "edu_air_advanced"
+    ]
+}

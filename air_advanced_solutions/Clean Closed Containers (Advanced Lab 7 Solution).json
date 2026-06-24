@@ -1,0 +1,67 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "customCode": "import phantom.rules as phantom\n#import json\n#from datetime import datetime, timedelta\n\ndef clean_closed_containers():\n    # deletes all finding containers in status_name == \"Closed\"\n        \n    containers_url = phantom.build_phantom_rest_url('container') + \"?_filter_data__status_name=\\\"Closed\\\"\"\n    response = phantom.requests.get(containers_url, verify=False)    \n    containers = response.json().get('data', [])\n    \n    if len(containers)==0:\n        phantom.debug(\"Did not find any closed findings\")\n        return\n    \n    phantom.debug(f\"Found {len(containers)} closed findings, deleting...\")\n    \n    for container in containers:\n        delete_url = phantom.build_phantom_rest_url('container', container[\"id\"])\n        delete_response = phantom.requests.delete(delete_url, verify=False)        \n\ndef on_start(container):\n    phantom.debug('on_start() called')    \n    clean_closed_containers() \n\ndef on_finish(container, summary):\n    phantom.debug(\"on_finish() called\")\n\n",
+            "description": "",
+            "edges": [],
+            "hash": "0e709bc55b8b7fcc1cb9badce83f1490b14f6c6a",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 419.9999999999998
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 1000
+                }
+            },
+            "notes": "",
+            "origin": {
+                "playbook_id": 322,
+                "playbook_name": "Clean Up Closed Containers",
+                "playbook_repo_id": 2,
+                "playbook_repo_name": "local"
+            }
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_trigger": "artifact_created",
+        "playbook_type": "automation",
+        "python_version": "3.13",
+        "schema": "5.0.24",
+        "version": "8.5.0.249"
+    },
+    "create_time": "2026-06-12T19:39:32.963771+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}

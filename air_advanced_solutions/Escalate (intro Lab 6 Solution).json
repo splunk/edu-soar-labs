@@ -1,0 +1,151 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "",
+            "edges": [
+                {
+                    "id": "port_0_to_port_5",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                }
+            ],
+            "hash": "03341cb51797a0213194a1fa2974def8c17aa8c7",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 419.9999999999998
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 1000
+                },
+                "5": {
+                    "data": {
+                        "action": "update finding or investigation",
+                        "actionType": "post",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "Enterprise Security",
+                        "connectorConfigs": [
+                            "builtin_mc_connector"
+                        ],
+                        "connectorId": "7e971d03-6ae7-4429-b4e1-cf461003e75b",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "update_finding_or_investigation_1",
+                        "id": "5",
+                        "loop": {
+                            "conditions": [
+                                {
+                                    "comparisons": [
+                                        {
+                                            "comparisonKey": "comparison_key_0",
+                                            "op": "==",
+                                            "param": "",
+                                            "value": ""
+                                        }
+                                    ],
+                                    "conditionIndex": 0,
+                                    "conditionKey": "condition_key_0",
+                                    "logic": "and",
+                                    "type": "if"
+                                }
+                            ],
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "parameters": {
+                            "id": "finding:id",
+                            "incident_note": {
+                                "content": "playbook_input:note_body",
+                                "title": "playbook_input:note_title"
+                            },
+                            "urgency": "high"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "id"
+                            }
+                        ],
+                        "type": "enterpriseSecurity"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "enterpriseSecurity",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 564.5
+                }
+            },
+            "notes": "",
+            "origin": {
+                "playbook_id": 178,
+                "playbook_name": "Escalate (intro lab 6 solution)",
+                "playbook_repo_id": 2,
+                "playbook_repo_name": "local"
+            }
+        },
+        "input_spec": [
+            {
+                "contains": [],
+                "description": "",
+                "name": "Note title"
+            },
+            {
+                "contains": [],
+                "description": "",
+                "name": "Note body"
+            }
+        ],
+        "output_spec": null,
+        "playbook_trigger": "artifact_created",
+        "playbook_type": "data",
+        "python_version": "3.13",
+        "schema": "5.0.24",
+        "version": "8.5.0.249"
+    },
+    "create_time": "2026-06-08T18:25:08.234778+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": [
+        "edu_air_intro"
+    ]
+}

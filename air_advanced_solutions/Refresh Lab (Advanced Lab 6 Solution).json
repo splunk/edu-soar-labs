@@ -1,0 +1,277 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_2_to_port_5",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_3",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                }
+            ],
+            "hash": "5c34588500f04fbe321a286582eb215b024dcaba",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {
+                        "input_spec": [
+                            {
+                                "name": "Name is required"
+                            }
+                        ]
+                    },
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 419.99999999999966
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 1140
+                },
+                "2": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Request Finding Evaluation",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "approver": {
+                            "type": "user",
+                            "value": "admin"
+                        },
+                        "functionId": 1,
+                        "functionName": "request_finding_evaluation",
+                        "id": "2",
+                        "message": "Please examine finding and set the appropriate urgency and owner ",
+                        "parameters": [],
+                        "responseTime": 30,
+                        "responses": [],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "prompt",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 580
+                },
+                "3": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_1",
+                        "id": "3",
+                        "parameters": [
+                            "request_finding_evaluation:action_result.summary.responses.0",
+                            "refresh_finding_or_investigation_2:action_result.data.*.data.urgency",
+                            "refresh_finding_or_investigation_2:action_result.data.*.data.owner",
+                            "finding:status"
+                        ],
+                        "template": "Responder comment:\n{0}\n\nNew finding Urgency: {1}\nNew finding Owner: {2}\nNew status: {3}\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 860
+                },
+                "4": {
+                    "data": {
+                        "action": "add finding or investigation note",
+                        "actionType": "post",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "Enterprise Security",
+                        "connectorConfigs": [
+                            "builtin_mc_connector"
+                        ],
+                        "connectorId": "7e971d03-6ae7-4429-b4e1-cf461003e75b",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "add_finding_or_investigation_note_1",
+                        "id": "4",
+                        "loop": {
+                            "conditions": [
+                                {
+                                    "comparisons": [
+                                        {
+                                            "comparisonKey": "comparison_key_0",
+                                            "op": "==",
+                                            "param": "",
+                                            "value": ""
+                                        }
+                                    ],
+                                    "conditionIndex": 0,
+                                    "conditionKey": "condition_key_0",
+                                    "logic": "and",
+                                    "type": "if"
+                                }
+                            ],
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "parameters": {
+                            "content": "format_1:formatted_data",
+                            "id": "finding:id",
+                            "title": "Responder update"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "id"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "",
+                                "field": "content"
+                            }
+                        ],
+                        "type": "enterpriseSecurity"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "enterpriseSecurity",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 1000
+                },
+                "5": {
+                    "data": {
+                        "action": "refresh finding or investigation",
+                        "actionType": "get",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "Enterprise Security",
+                        "connectorConfigs": [
+                            "builtin_mc_connector"
+                        ],
+                        "connectorId": "7e971d03-6ae7-4429-b4e1-cf461003e75b",
+                        "connectorVersion": "v1",
+                        "functionId": 2,
+                        "functionName": "refresh_finding_or_investigation_2",
+                        "id": "5",
+                        "loop": {
+                            "conditions": [
+                                {
+                                    "comparisons": [
+                                        {
+                                            "comparisonKey": "comparison_key_0",
+                                            "op": "==",
+                                            "param": "",
+                                            "value": ""
+                                        }
+                                    ],
+                                    "conditionIndex": 0,
+                                    "conditionKey": "condition_key_0",
+                                    "logic": "and",
+                                    "type": "if"
+                                }
+                            ],
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "parameters": {
+                            "id": "finding:id"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "id"
+                            }
+                        ],
+                        "type": "enterpriseSecurity"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "enterpriseSecurity",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 740
+                }
+            },
+            "notes": "",
+            "origin": {
+                "playbook_id": 314,
+                "playbook_name": "Refresh Lab",
+                "playbook_repo_id": 2,
+                "playbook_repo_name": "local"
+            }
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_trigger": "artifact_created",
+        "playbook_type": "es",
+        "python_version": "3.13",
+        "schema": "5.0.24",
+        "version": "8.5.0.249"
+    },
+    "create_time": "2026-06-11T21:44:28.853959+00:00",
+    "draft_mode": false,
+    "labels": [
+        "es_soar_integration"
+    ],
+    "tags": []
+}
