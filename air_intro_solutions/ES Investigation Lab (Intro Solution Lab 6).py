@@ -1,0 +1,413 @@
+"""
+
+"""
+
+
+import phantom.rules as phantom
+import json
+from datetime import datetime, timedelta
+
+
+@phantom.playbook_block()
+def on_start(container):
+    phantom.debug('on_start() called')
+
+    # call 'update_finding_or_investigation_1' block
+    update_finding_or_investigation_1(container=container)
+
+    return
+
+@phantom.playbook_block()
+def locate_source(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("locate_source() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    finding_data = phantom.collect2(container=container, datapath=["finding:consolidated_findings.sourceAddress"])
+
+    parameters = []
+
+    # build parameters list for 'locate_source' call
+    for finding_data_item in finding_data:
+        if finding_data_item[0] is not None:
+            parameters.append({
+                "ip": finding_data_item[0],
+            })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("geolocate ip", parameters=parameters, name="locate_source", assets=["maxmind"], callback=join_check_reports)
+
+    return
+
+
+@phantom.playbook_block()
+def virus_search(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("virus_search() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    finding_data = phantom.collect2(container=container, datapath=["finding:consolidated_findings.file_hash"])
+
+    parameters = []
+
+    # build parameters list for 'virus_search' call
+    for finding_data_item in finding_data:
+        if finding_data_item[0] is not None:
+            parameters.append({
+                "hash": finding_data_item[0],
+            })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("file reputation", parameters=parameters, name="virus_search", assets=["virustotal"], callback=join_check_reports)
+
+    return
+
+
+@phantom.playbook_block()
+def source_reputation(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("source_reputation() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    finding_data = phantom.collect2(container=container, datapath=["finding:consolidated_findings.sourceDnsDomain"])
+
+    parameters = []
+
+    # build parameters list for 'source_reputation' call
+    for finding_data_item in finding_data:
+        if finding_data_item[0] is not None:
+            parameters.append({
+                "domain": finding_data_item[0],
+            })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("domain reputation", parameters=parameters, name="source_reputation", assets=["virustotal"], callback=join_check_reports)
+
+    return
+
+
+@phantom.playbook_block()
+def join_check_reports(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("join_check_reports() called")
+
+    if phantom.completed(action_names=["locate_source", "virus_search", "source_reputation"]):
+        # call connected block "check_reports"
+        check_reports(container=container, handle=handle)
+
+    return
+
+
+@phantom.playbook_block()
+def check_reports(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("check_reports() called")
+
+    # check for 'if' condition 1
+    found_match_1 = phantom.decision(
+        container=container,
+        conditions=[
+            ["virus_search:action_result.summary.malicious", ">", 0]
+        ],
+        conditions_dps=[
+            ["virus_search:action_result.summary.malicious", ">", 0]
+        ],
+        name="check_reports:condition_1",
+        delimiter=None)
+
+    # call connected blocks if condition 1 matched
+    if found_match_1:
+        notify_soc_management(action=action, success=success, container=container, results=results, handle=handle)
+        return
+
+    # check for 'else' condition 2
+    update_finding_or_investigation_2(action=action, success=success, container=container, results=results, handle=handle)
+
+    return
+
+
+@phantom.playbook_block()
+def notify_soc_management(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("notify_soc_management() called")
+
+    # set approver and message variables for phantom.prompt call
+
+    user = None
+    role = "Administrator"
+    message = """A potentially malicious file download has been detected on a local server with IP address {0}."""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "finding:consolidated_findings.destinationAddess"
+    ]
+
+    # responses
+    response_types = [
+        {
+            "prompt": "Notify SOC Management?",
+            "options": {
+                "type": "list",
+                "required": True,
+                "choices": [
+                    "Yes",
+                    "No"
+                ],
+            },
+        },
+        {
+            "prompt": "Reason for this decision",
+            "options": {
+                "type": "message",
+                "required": True,
+            },
+        }
+    ]
+
+    phantom.prompt2(container=container, user=user, role=role, message=message, respond_in_mins=1, name="notify_soc_management", parameters=parameters, response_types=response_types, callback=evaluate_prompt, drop_none=True)
+
+    return
+
+
+@phantom.playbook_block()
+def update_finding_or_investigation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("update_finding_or_investigation_1() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    finding_data = phantom.collect2(container=container, datapath=["finding:id"])
+
+    parameters = []
+
+    # build parameters list for 'update_finding_or_investigation_1' call
+    for finding_data_item in finding_data:
+        if finding_data_item[0] is not None:
+            parameters.append({
+                "id": finding_data_item[0],
+                "status": "In Progress",
+            })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("update finding or investigation", parameters=parameters, name="update_finding_or_investigation_1", assets=["builtin_mc_connector"], callback=update_finding_or_investigation_1_callback)
+
+    return
+
+
+@phantom.playbook_block()
+def update_finding_or_investigation_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("update_finding_or_investigation_1_callback() called")
+
+    
+    virus_search(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=filtered_artifacts, filtered_results=filtered_results)
+    locate_source(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=filtered_artifacts, filtered_results=filtered_results)
+    source_reputation(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=filtered_artifacts, filtered_results=filtered_results)
+
+
+    return
+
+
+@phantom.playbook_block()
+def evaluate_prompt(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("evaluate_prompt() called")
+
+    # check for 'if' condition 1
+    found_match_1 = phantom.decision(
+        container=container,
+        conditions=[
+            ["notify_soc_management:action_result.summary.responses.0", "==", "Yes"]
+        ],
+        conditions_dps=[
+            ["notify_soc_management:action_result.summary.responses.0", "==", "Yes"]
+        ],
+        name="evaluate_prompt:condition_1",
+        delimiter=None)
+
+    # call connected blocks if condition 1 matched
+    if found_match_1:
+        return
+
+    # check for 'elif' condition 2
+    found_match_2 = phantom.decision(
+        container=container,
+        conditions=[
+            ["notify_soc_management:action_result.status", "!=", "success"]
+        ],
+        conditions_dps=[
+            ["notify_soc_management:action_result.status", "!=", "success"]
+        ],
+        name="evaluate_prompt:condition_2",
+        delimiter=None)
+
+    # call connected blocks if condition 2 matched
+    if found_match_2:
+        update_finding_or_investigation_3(action=action, success=success, container=container, results=results, handle=handle)
+        return
+
+    # check for 'else' condition 3
+    update_finding_or_investigation_4(action=action, success=success, container=container, results=results, handle=handle)
+
+    return
+
+
+@phantom.playbook_block()
+def update_finding_or_investigation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("update_finding_or_investigation_2() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    finding_data = phantom.collect2(container=container, datapath=["finding:id"])
+
+    parameters = []
+
+    # build parameters list for 'update_finding_or_investigation_2' call
+    for finding_data_item in finding_data:
+        if finding_data_item[0] is not None:
+            parameters.append({
+                "id": finding_data_item[0],
+                "status": "Closed",
+                "incident_note": {
+                    "title": "Automated Analysis Results",
+                    "content": "Analysis of uploaded file indicates non-malicious content",
+                },
+            })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("update finding or investigation", parameters=parameters, name="update_finding_or_investigation_2", assets=["builtin_mc_connector"])
+
+    return
+
+
+@phantom.playbook_block()
+def update_finding_or_investigation_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("update_finding_or_investigation_3() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    finding_data = phantom.collect2(container=container, datapath=["finding:id"])
+
+    parameters = []
+
+    # build parameters list for 'update_finding_or_investigation_3' call
+    for finding_data_item in finding_data:
+        if finding_data_item[0] is not None:
+            parameters.append({
+                "id": finding_data_item[0],
+                "status": "Pending",
+                "incident_note": {
+                    "title": "Status changed to Pending",
+                    "content": "No response was received from SOC Management",
+                },
+            })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("update finding or investigation", parameters=parameters, name="update_finding_or_investigation_3", assets=["builtin_mc_connector"])
+
+    return
+
+
+@phantom.playbook_block()
+def update_finding_or_investigation_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("update_finding_or_investigation_4() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    finding_data = phantom.collect2(container=container, datapath=["finding:id"])
+    notify_soc_management_result_data = phantom.collect2(container=container, datapath=["notify_soc_management:action_result.summary.responses.1","notify_soc_management:action_result.parameter.context.artifact_id"], action_results=results)
+
+    parameters = []
+
+    # build parameters list for 'update_finding_or_investigation_4' call
+    for finding_data_item in finding_data:
+        for notify_soc_management_result_item in notify_soc_management_result_data:
+            if finding_data_item[0] is not None:
+                parameters.append({
+                    "id": finding_data_item[0],
+                    "owner": "analyst",
+                    "status": "Open",
+                    "incident_note": {
+                        "title": "Response from SOC management",
+                        "content": notify_soc_management_result_item[0],
+                    },
+                })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("update finding or investigation", parameters=parameters, name="update_finding_or_investigation_4", assets=["builtin_mc_connector"])
+
+    return
+
+
+@phantom.playbook_block()
+def on_finish(container, summary):
+    phantom.debug("on_finish() called")
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    return
