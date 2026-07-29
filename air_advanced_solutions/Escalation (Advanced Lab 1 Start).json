@@ -30,7 +30,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999999
+                    "y": 419.9999999999998
                 },
                 "1": {
                     "data": {
@@ -115,10 +115,10 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 174,
-                "playbook_name": "Escalation (Intro Solution Lab 7)",
-                "playbook_repo_id": 3,
-                "playbook_repo_name": "Intro_Solutions"
+                "playbook_id": 196,
+                "playbook_name": "Escalation (Lab 1 Start)",
+                "playbook_repo_id": 4,
+                "playbook_repo_name": "Advanced_Solutions"
             }
         },
         "input_spec": [
@@ -140,7 +140,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-29T19:19:56.645371+00:00",
+    "create_time": "2026-07-29T19:23:41.499859+00:00",
     "draft_mode": false,
     "labels": [
         "*"
