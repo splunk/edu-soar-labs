@@ -55,7 +55,7 @@ def virus_search(action=None, success=None, container=None, results=None, handle
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
-    finding_data = phantom.collect2(container=container, datapath=["finding:consolidated_findings.file_hash"])
+    finding_data = phantom.collect2(container=container, datapath=["finding:consolidated_findings.fileHash"])
 
     parameters = []
 
@@ -433,8 +433,8 @@ def playbook_escalation__advanced_lab_1_start__1(action=None, success=None, cont
     phantom.debug("playbook_escalation__advanced_lab_1_start__1() called")
 
     inputs = {
-        "note_title": [],
         "note_body": [],
+        "note_title": [],
     }
 
     ################################################################################
