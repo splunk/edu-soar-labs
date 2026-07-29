@@ -423,20 +423,18 @@ def compose_report(action=None, success=None, container=None, results=None, hand
 
     phantom.format(container=container, template=template, parameters=parameters, name="compose_report")
 
-    playbook_escalation__intro_solution_lab_7__1(container=container)
+    playbook_escalation__advanced_lab_1_start__1(container=container)
 
     return
 
 
 @phantom.playbook_block()
-def playbook_escalation__intro_solution_lab_7__1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("playbook_escalation__intro_solution_lab_7__1() called")
-
-    compose_report = phantom.get_format_data(name="compose_report")
+def playbook_escalation__advanced_lab_1_start__1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("playbook_escalation__advanced_lab_1_start__1() called")
 
     inputs = {
-        "note_title": ["Automated Analysis Results"],
-        "note_body": compose_report,
+        "note_title": [],
+        "note_body": [],
     }
 
     ################################################################################
@@ -449,8 +447,8 @@ def playbook_escalation__intro_solution_lab_7__1(action=None, success=None, cont
     ## Custom Code End
     ################################################################################
 
-    # call playbook "local/Escalation (Intro Solution Lab 7)", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("local/Escalation (Intro Solution Lab 7)", container=container, inputs=inputs)
+    # call playbook "Advanced_Solutions/Escalation (Advanced Lab 1 Start)", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Advanced_Solutions/Escalation (Advanced Lab 1 Start)", container=container, inputs=inputs)
 
     return
 

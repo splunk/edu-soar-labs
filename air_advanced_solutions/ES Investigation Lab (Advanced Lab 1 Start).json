@@ -135,7 +135,7 @@
                     "targetPort": "14_in"
                 }
             ],
-            "hash": "71961a60cb335b8d3ef412f26ca83cb5ae55fbbb",
+            "hash": "9f0f81402d165cd0edae14f9be2f46ed757e7391",
             "nodes": {
                 "0": {
                     "data": {
@@ -151,7 +151,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1420,
-                    "y": -160.0000000000001
+                    "y": -160.00000000000017
                 },
                 "1": {
                     "data": {
@@ -394,19 +394,15 @@
                             "join": []
                         },
                         "functionId": 1,
-                        "functionName": "playbook_Escalation_(Intro_Solution_Lab_7)_1",
+                        "functionName": "playbook_Escalation_(Advanced_Lab_1_Start)_1",
                         "id": "14",
                         "inputs": {
                             "Note Body": {
-                                "datapaths": [
-                                    "compose_report:formatted_data"
-                                ],
+                                "datapaths": [],
                                 "deduplicate": false
                             },
                             "Note Title": {
-                                "datapaths": [
-                                    "Automated Analysis Results"
-                                ],
+                                "datapaths": [],
                                 "deduplicate": false
                             }
                         },
@@ -435,9 +431,9 @@
                             "pauseUnit": "m",
                             "pauseValue": 2
                         },
-                        "playbookName": "Escalation (Intro Solution Lab 7)",
-                        "playbookRepo": 2,
-                        "playbookRepoName": "local",
+                        "playbookName": "Escalation (Advanced Lab 1 Start)",
+                        "playbookRepo": 4,
+                        "playbookRepoName": "Advanced_Solutions",
                         "playbookType": "data",
                         "synchronous": false,
                         "type": "playbook"
@@ -789,7 +785,7 @@
                     "type": "enterpriseSecurity",
                     "warnings": {},
                     "x": 1400,
-                    "y": 1.4210854715202004e-14
+                    "y": 2.1316282072803006e-14
                 },
                 "9": {
                     "data": {
@@ -874,7 +870,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-29T19:20:29.490291+00:00",
+    "create_time": "2026-07-29T19:44:46.192642+00:00",
     "draft_mode": false,
     "labels": [
         "es_soar_integration"
