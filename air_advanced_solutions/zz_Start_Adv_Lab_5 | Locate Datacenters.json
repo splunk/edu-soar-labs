@@ -58,7 +58,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 920,
-                    "y": 199.9999999999999
+                    "y": 199.99999999999983
                 },
                 "1": {
                     "data": {
@@ -74,7 +74,7 @@
                     "type": "end",
                     "warnings": {},
                     "x": 1220,
-                    "y": 199.99999999999977
+                    "y": 199.99999999999972
                 },
                 "10": {
                     "data": {
@@ -311,10 +311,10 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 286,
-                "playbook_name": "Locate Datacenters (Advanced Solution Lab 5)",
-                "playbook_repo_id": 2,
-                "playbook_repo_name": "local"
+                "playbook_id": 293,
+                "playbook_name": "Locate Datacenters (Advanced Lab 5 Solution)",
+                "playbook_repo_id": 6,
+                "playbook_repo_name": "Advanced_Solutions"
             }
         },
         "input_spec": null,
@@ -325,7 +325,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-06-10T15:51:09.069508+00:00",
+    "create_time": "2026-07-30T23:34:54.735993+00:00",
     "draft_mode": false,
     "labels": [
         "es_soar_integration"
