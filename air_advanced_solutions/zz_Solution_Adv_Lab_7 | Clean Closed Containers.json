@@ -23,7 +23,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999998
+                    "y": 419.99999999999966
                 },
                 "1": {
                     "data": {
@@ -44,10 +44,10 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 322,
-                "playbook_name": "Clean Up Closed Containers",
-                "playbook_repo_id": 2,
-                "playbook_repo_name": "local"
+                "playbook_id": 287,
+                "playbook_name": "Clean Closed Containers (Advanced Lab 7 Solution)",
+                "playbook_repo_id": 6,
+                "playbook_repo_name": "Advanced_Solutions"
             }
         },
         "input_spec": null,
@@ -58,7 +58,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-06-12T19:39:32.963771+00:00",
+    "create_time": "2026-07-30T23:30:33.530895+00:00",
     "draft_mode": false,
     "labels": [
         "*"
