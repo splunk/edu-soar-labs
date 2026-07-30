@@ -22,7 +22,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999998
+                    "y": 419.99999999999966
                 },
                 "1": {
                     "data": {
@@ -43,10 +43,10 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 323,
-                "playbook_name": "Push to SOAR",
-                "playbook_repo_id": 2,
-                "playbook_repo_name": "local"
+                "playbook_id": 295,
+                "playbook_name": "Push to SOAR (Advanced Lab 7 Solution)",
+                "playbook_repo_id": 6,
+                "playbook_repo_name": "Advanced_Solutions"
             }
         },
         "input_spec": null,
@@ -57,7 +57,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-30T15:28:30.830830+00:00",
+    "create_time": "2026-07-30T23:35:36.329879+00:00",
     "draft_mode": false,
     "labels": [
         "es_soar_integration"
