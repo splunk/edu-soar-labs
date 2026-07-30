@@ -84,7 +84,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999991
+                    "y": 419.999999999999
                 },
                 "1": {
                     "data": {
@@ -615,9 +615,9 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 182,
-                "playbook_name": "Escalate to Investigation (Advanced Lab 2 Solution)",
-                "playbook_repo_id": 4,
+                "playbook_id": 291,
+                "playbook_name": "Escalation (Advanced Lab 2 Solution)",
+                "playbook_repo_id": 6,
                 "playbook_repo_name": "Advanced_Solutions"
             }
         },
@@ -640,7 +640,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-29T19:31:35.812046+00:00",
+    "create_time": "2026-07-30T23:33:24.220272+00:00",
     "draft_mode": false,
     "labels": [
         "*"
