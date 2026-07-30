@@ -84,7 +84,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.999999999999
+                    "y": 419.99999999999886
                 },
                 "1": {
                     "data": {
@@ -615,8 +615,8 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 291,
-                "playbook_name": "Escalation (Advanced Lab 2 Solution)",
+                "playbook_id": 306,
+                "playbook_name": "zz_Start_Adv_Lab_2 | Start Infection Investigation",
                 "playbook_repo_id": 6,
                 "playbook_repo_name": "Advanced_Solutions"
             }
