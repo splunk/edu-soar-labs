@@ -208,17 +208,17 @@ def join_list_merge_1(action=None, success=None, container=None, results=None, h
 def list_merge_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("list_merge_1() called")
 
-    start_investigations_2_result_data = phantom.collect2(container=container, datapath=["start_investigations_2:action_result.data.*.id","start_investigations_2:action_result.parameter.context.artifact_id"], action_results=results)
-    add_finding_to_investigation_4_result_data = phantom.collect2(container=container, datapath=["add_finding_to_investigation_4:action_result.data.*.id","add_finding_to_investigation_4:action_result.parameter.context.artifact_id"], action_results=results)
+    new_investigation_result_data = phantom.collect2(container=container, datapath=["new_investigation:action_result.data.*.id","new_investigation:action_result.parameter.context.artifact_id"], action_results=results)
+    existing_investigation_result_data = phantom.collect2(container=container, datapath=["existing_investigation:action_result.data.*.id","existing_investigation:action_result.parameter.context.artifact_id"], action_results=results)
 
-    start_investigations_2_result_item_0 = [item[0] for item in start_investigations_2_result_data]
-    add_finding_to_investigation_4_result_item_0 = [item[0] for item in add_finding_to_investigation_4_result_data]
+    new_investigation_result_item_0 = [item[0] for item in new_investigation_result_data]
+    existing_investigation_result_item_0 = [item[0] for item in existing_investigation_result_data]
 
     parameters = []
 
     parameters.append({
-        "input_1": start_investigations_2_result_item_0,
-        "input_2": add_finding_to_investigation_4_result_item_0,
+        "input_1": new_investigation_result_item_0,
+        "input_2": existing_investigation_result_item_0,
         "input_3": None,
         "input_4": None,
         "input_5": None,

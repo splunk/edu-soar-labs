@@ -68,7 +68,7 @@
                     "targetPort": "11_in"
                 }
             ],
-            "hash": "dbd513fc321f2d37d8502c9e09a0a0998775c4a7",
+            "hash": "d5bb94365ea895798ca12b313da1c8491c3183ad",
             "nodes": {
                 "0": {
                     "data": {
@@ -84,7 +84,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.99999999999875
+                    "y": 419.99999999999864
                 },
                 "1": {
                     "data": {
@@ -346,11 +346,11 @@
                         "values": {
                             "list_merge": {
                                 "input_1": [
-                                    "start_investigations_2:action_result.data.*.id"
+                                    "new_investigation:action_result.data.*.id"
                                 ],
                                 "input_10": null,
                                 "input_2": [
-                                    "add_finding_to_investigation_4:action_result.data.*.id"
+                                    "existing_investigation:action_result.data.*.id"
                                 ],
                                 "input_3": null,
                                 "input_4": null,
@@ -648,7 +648,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-08-14T00:48:13.805654+00:00",
+    "create_time": "2026-08-14T01:00:58.656081+00:00",
     "draft_mode": false,
     "labels": [
         "*"
