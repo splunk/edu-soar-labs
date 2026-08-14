@@ -27,7 +27,7 @@ def find_open_investigation(action=None, success=None, container=None, results=N
 
     parameters.append({
         "status": "In Progress",
-        "investigation_search_term": "infection on host",
+        "investigation_search_term": "Infection on host",
     })
 
     ################################################################################
@@ -63,18 +63,18 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
 
     # call connected blocks if condition 1 matched
     if found_match_1:
-        start_investigations_2(action=action, success=success, container=container, results=results, handle=handle)
+        new_investigation(action=action, success=success, container=container, results=results, handle=handle)
         return
 
     # check for 'else' condition 2
-    add_finding_to_investigation_4(action=action, success=success, container=container, results=results, handle=handle)
+    existing_investigation(action=action, success=success, container=container, results=results, handle=handle)
 
     return
 
 
 @phantom.playbook_block()
-def start_investigations_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("start_investigations_2() called")
+def new_investigation(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("new_investigation() called")
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
@@ -82,7 +82,7 @@ def start_investigations_2(action=None, success=None, container=None, results=No
 
     parameters = []
 
-    # build parameters list for 'start_investigations_2' call
+    # build parameters list for 'new_investigation' call
     for finding_data_item in finding_data:
         parameters.append({
             "name": "Infection on host",
@@ -90,7 +90,7 @@ def start_investigations_2(action=None, success=None, container=None, results=No
             "finding_ids": [
                 finding_data_item[0],
             ],
-            "inherit_fields": "f",
+            "inherit_fields": 0,
         })
 
     ################################################################################
@@ -104,14 +104,14 @@ def start_investigations_2(action=None, success=None, container=None, results=No
     ## Custom Code End
     ################################################################################
 
-    phantom.act("start investigations", parameters=parameters, name="start_investigations_2", assets=["builtin_mc_connector"], callback=join_list_merge_1)
+    phantom.act("start investigations", parameters=parameters, name="new_investigation", assets=["builtin_mc_connector"], callback=join_list_merge_1)
 
     return
 
 
 @phantom.playbook_block()
-def add_finding_to_investigation_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("add_finding_to_investigation_4() called")
+def existing_investigation(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("existing_investigation() called")
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
@@ -120,7 +120,7 @@ def add_finding_to_investigation_4(action=None, success=None, container=None, re
 
     parameters = []
 
-    # build parameters list for 'add_finding_to_investigation_4' call
+    # build parameters list for 'existing_investigation' call
     for find_open_investigation_result_item in find_open_investigation_result_data:
         for finding_data_item in finding_data:
             if find_open_investigation_result_item[0] is not None:
@@ -143,7 +143,7 @@ def add_finding_to_investigation_4(action=None, success=None, container=None, re
     ## Custom Code End
     ################################################################################
 
-    phantom.act("add finding to investigation", parameters=parameters, name="add_finding_to_investigation_4", assets=["builtin_mc_connector"], callback=join_list_merge_1)
+    phantom.act("add finding to investigation", parameters=parameters, name="existing_investigation", assets=["builtin_mc_connector"], callback=join_list_merge_1)
 
     return
 
@@ -191,9 +191,15 @@ def add_finding_or_investigation_note_6(action=None, success=None, container=Non
 def join_list_merge_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("join_list_merge_1() called")
 
-    if phantom.completed(action_names=["start_investigations_2", "add_finding_to_investigation_4"]):
-        # call connected block "list_merge_1"
-        list_merge_1(container=container, handle=handle)
+    # if the joined function has already been called, do nothing
+    if phantom.get_run_data(key="join_list_merge_1_called"):
+        return
+
+    # save the state that the joined function has now been called
+    phantom.save_block_result(key="join_list_merge_1_called", value="list_merge_1")
+
+    # call connected block "list_merge_1"
+    list_merge_1(container=container, handle=handle)
 
     return
 

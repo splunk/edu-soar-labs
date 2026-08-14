@@ -68,7 +68,7 @@
                     "targetPort": "11_in"
                 }
             ],
-            "hash": "110642de1512c8eab993162ad214329e2473f7d5",
+            "hash": "dbd513fc321f2d37d8502c9e09a0a0998775c4a7",
             "nodes": {
                 "0": {
                     "data": {
@@ -84,7 +84,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.99999999999886
+                    "y": 419.99999999999875
                 },
                 "1": {
                     "data": {
@@ -166,13 +166,17 @@
                     "type": "enterpriseSecurity",
                     "userCode": "\n    # Write your custom code here...\n    phantom.debug(parameters)\n\n",
                     "warnings": {},
-                    "x": 940,
-                    "y": 1160
+                    "x": 980,
+                    "y": 1120
                 },
                 "13": {
                     "data": {
                         "advanced": {
-                            "join": []
+                            "join": [],
+                            "notRequiredJoins": [
+                                "7",
+                                "8"
+                            ]
                         },
                         "customFunction": {
                             "draftMode": false,
@@ -362,15 +366,15 @@
                     "id": "13",
                     "type": "utility",
                     "warnings": {},
-                    "x": 940,
-                    "y": 1004.5
+                    "x": 980,
+                    "y": 1000
                 },
                 "5": {
                     "data": {
                         "action": "list investigations",
                         "actionType": "get",
                         "advanced": {
-                            "customName": "find open investigation",
+                            "customName": "Find Open Investigation",
                             "customNameId": 0,
                             "join": []
                         },
@@ -409,7 +413,7 @@
                             "pauseValue": 2
                         },
                         "parameters": {
-                            "investigation_search_term": "infection on host",
+                            "investigation_search_term": "Infection on host",
                             "status": "In Progress"
                         },
                         "requiredParameters": [],
@@ -438,7 +442,7 @@
                                 ],
                                 "conditionIndex": 0,
                                 "conditionKey": "condition_key_0",
-                                "customName": "Not found",
+                                "customName": "Not Found",
                                 "logic": "and",
                                 "type": "if"
                             },
@@ -475,6 +479,8 @@
                         "action": "start investigations",
                         "actionType": "post",
                         "advanced": {
+                            "customName": "New Investigation",
+                            "customNameId": 0,
                             "join": [],
                             "note": ""
                         },
@@ -485,7 +491,7 @@
                         "connectorId": "7e971d03-6ae7-4429-b4e1-cf461003e75b",
                         "connectorVersion": "v1",
                         "functionId": 2,
-                        "functionName": "start_investigations_2",
+                        "functionName": "new_investigation",
                         "id": "7",
                         "loop": {
                             "conditions": [
@@ -516,7 +522,7 @@
                             "finding_ids": [
                                 "finding:id"
                             ],
-                            "inherit_fields": "f",
+                            "inherit_fields": "0",
                             "name": "Infection on host",
                             "status": "In Progress"
                         },
@@ -547,6 +553,8 @@
                         "action": "add finding to investigation",
                         "actionType": "post",
                         "advanced": {
+                            "customName": "Existing Investigation",
+                            "customNameId": 0,
                             "join": [],
                             "note": ""
                         },
@@ -557,7 +565,7 @@
                         "connectorId": "7e971d03-6ae7-4429-b4e1-cf461003e75b",
                         "connectorVersion": "v1",
                         "functionId": 4,
-                        "functionName": "add_finding_to_investigation_4",
+                        "functionName": "existing_investigation",
                         "id": "8",
                         "loop": {
                             "conditions": [
@@ -609,7 +617,7 @@
                     "type": "enterpriseSecurity",
                     "userCode": "\n    # Write your custom code here...\n    phantom.save_block_result(key=\"investigation_state\", value=\"add\")\n",
                     "warnings": {},
-                    "x": 1140,
+                    "x": 1160,
                     "y": 860
                 }
             },
@@ -640,7 +648,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-30T23:33:24.220272+00:00",
+    "create_time": "2026-08-14T00:48:13.805654+00:00",
     "draft_mode": false,
     "labels": [
         "*"
