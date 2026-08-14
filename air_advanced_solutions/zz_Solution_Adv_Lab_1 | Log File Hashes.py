@@ -62,7 +62,7 @@ def add_to_list_1(action=None, success=None, container=None, results=None, handl
     ## Custom Code End
     ################################################################################
 
-    phantom.add_list(list_name="prior hashes", values=playbook_input_hash_values)
+    phantom.add_list(list_name="Prior Hashes", values=playbook_input_hash_values)
 
     return
 
@@ -83,7 +83,7 @@ def add_finding_or_investigation_note_1(action=None, success=None, container=Non
             parameters.append({
                 "id": finding_data_item[0],
                 "title": "Automated Analysis",
-                "content": "Malicious file has been observed before",
+                "content": "File has been observed before",
             })
 
     ################################################################################

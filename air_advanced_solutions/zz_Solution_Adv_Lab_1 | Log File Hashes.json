@@ -40,7 +40,7 @@
                     "targetPort": "5_in"
                 }
             ],
-            "hash": "a91892f87c90adfb6674e65bc2963c937d81d553",
+            "hash": "48da06afa7ea1282f9ce3d9ae8a989d9341cf5cc",
             "nodes": {
                 "0": {
                     "data": {
@@ -56,7 +56,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.99999999999966
+                    "y": 419.99999999999955
                 },
                 "1": {
                     "data": {
@@ -72,7 +72,7 @@
                     "type": "end",
                     "warnings": {},
                     "x": 1000,
-                    "y": 1000
+                    "y": 940
                 },
                 "2": {
                     "data": {
@@ -188,7 +188,7 @@
                         "utilityType": "api",
                         "values": {
                             "add_list": {
-                                "list_name": "prior hashes",
+                                "list_name": "Prior Hashes",
                                 "values": "playbook_input:hash"
                             }
                         }
@@ -197,8 +197,8 @@
                     "id": "4",
                     "type": "utility",
                     "warnings": {},
-                    "x": 980,
-                    "y": 740
+                    "x": 1180,
+                    "y": 760
                 },
                 "5": {
                     "data": {
@@ -242,7 +242,7 @@
                             "pauseValue": 2
                         },
                         "parameters": {
-                            "content": "Malicious file has been observed before",
+                            "content": "File has been observed before",
                             "id": "finding:id",
                             "title": "Automated Analysis"
                         },
@@ -263,16 +263,16 @@
                     "id": "5",
                     "type": "enterpriseSecurity",
                     "warnings": {},
-                    "x": 660,
-                    "y": 740
+                    "x": 780,
+                    "y": 760
                 }
             },
             "notes": "",
             "origin": {
-                "playbook_id": 294,
-                "playbook_name": "Log Prior Hashes (Advanced Lab 1 Solution)",
-                "playbook_repo_id": 6,
-                "playbook_repo_name": "Advanced_Solutions"
+                "playbook_id": 224,
+                "playbook_name": "zz_Solution_Adv_Lab_1 | Log Prior Hashes",
+                "playbook_repo_id": 8,
+                "playbook_repo_name": "ADV2"
             }
         },
         "input_spec": [
@@ -291,7 +291,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-30T23:27:05.908817+00:00",
+    "create_time": "2026-08-14T03:03:55.418908+00:00",
     "draft_mode": false,
     "labels": [
         "*"
