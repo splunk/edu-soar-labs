@@ -53,7 +53,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 920,
-                    "y": 199.99999999999974
+                    "y": 199.9999999999997
                 },
                 "1": {
                     "customCode": null,
@@ -71,7 +71,7 @@
                     "userCode": "\n    # Write your custom code here...\n\n",
                     "warnings": {},
                     "x": 1220,
-                    "y": 205.99999999999977
+                    "y": 205.99999999999972
                 },
                 "5": {
                     "data": {
@@ -282,9 +282,9 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 307,
-                "playbook_name": "zz_Start_Adv_Lab_3 | Locate Datacenters",
-                "playbook_repo_id": 6,
+                "playbook_id": 181,
+                "playbook_name": "zz_Solution_Adv_Lab_3 | Locate Datacenters",
+                "playbook_repo_id": 4,
                 "playbook_repo_name": "Advanced_Solutions"
             }
         },
@@ -296,7 +296,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-30T23:34:09.316170+00:00",
+    "create_time": "2026-08-14T22:59:00.109058+00:00",
     "draft_mode": false,
     "labels": [
         "es_soar_integration"
