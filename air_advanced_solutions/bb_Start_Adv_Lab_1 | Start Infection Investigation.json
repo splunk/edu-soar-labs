@@ -30,7 +30,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.99999999999966
+                    "y": 419.99999999999955
                 },
                 "1": {
                     "data": {
@@ -46,7 +46,7 @@
                     "type": "end",
                     "warnings": {},
                     "x": 1000,
-                    "y": 1000
+                    "y": 760
                 },
                 "2": {
                     "data": {
@@ -110,14 +110,14 @@
                     "type": "enterpriseSecurity",
                     "warnings": {},
                     "x": 980,
-                    "y": 544.5
+                    "y": 540
                 }
             },
             "notes": "",
             "origin": {
-                "playbook_id": 298,
-                "playbook_name": "zz_Start_Adv_Lab_1 | Start Infection Investigaction",
-                "playbook_repo_id": 6,
+                "playbook_id": 187,
+                "playbook_name": "zz_Start_Adv_Lab_1 | Start Infection Investigation",
+                "playbook_repo_id": 4,
                 "playbook_repo_name": "Advanced_Solutions"
             }
         },
@@ -140,7 +140,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-30T23:24:08.878855+00:00",
+    "create_time": "2026-08-14T23:59:41.638455+00:00",
     "draft_mode": false,
     "labels": [
         "*"
