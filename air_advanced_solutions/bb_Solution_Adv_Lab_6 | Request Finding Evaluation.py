@@ -36,8 +36,8 @@ def request_finding_evaluation(action=None, success=None, container=None, result
 
 
 @phantom.playbook_block()
-def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("format_1() called")
+def evaluation_results(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("evaluation_results() called")
 
     template = """Responder comment:\n{0}\n\nNew finding Urgency: {1}\nNew finding Owner: {2}\nNew status: {3}\n"""
 
@@ -46,7 +46,7 @@ def format_1(action=None, success=None, container=None, results=None, handle=Non
         "request_finding_evaluation:action_result.summary.responses.0",
         "refresh_finding_or_investigation_2:action_result.data.*.data.urgency",
         "refresh_finding_or_investigation_2:action_result.data.*.data.owner",
-        "finding:status"
+        "refresh_finding_or_investigation_2:action_result.data.*.data.status"
     ]
 
     ################################################################################
@@ -59,7 +59,7 @@ def format_1(action=None, success=None, container=None, results=None, handle=Non
     ## Custom Code End
     ################################################################################
 
-    phantom.format(container=container, template=template, parameters=parameters, name="format_1")
+    phantom.format(container=container, template=template, parameters=parameters, name="evaluation_results")
 
     add_finding_or_investigation_note_1(container=container)
 
@@ -73,17 +73,17 @@ def add_finding_or_investigation_note_1(action=None, success=None, container=Non
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
     finding_data = phantom.collect2(container=container, datapath=["finding:id"])
-    format_1 = phantom.get_format_data(name="format_1")
+    evaluation_results = phantom.get_format_data(name="evaluation_results")
 
     parameters = []
 
     # build parameters list for 'add_finding_or_investigation_note_1' call
     for finding_data_item in finding_data:
-        if finding_data_item[0] is not None and format_1 is not None:
+        if finding_data_item[0] is not None and evaluation_results is not None:
             parameters.append({
                 "id": finding_data_item[0],
-                "title": "Responder update",
-                "content": format_1,
+                "title": "Evaluation Results",
+                "content": evaluation_results,
             })
 
     ################################################################################
@@ -128,7 +128,7 @@ def refresh_finding_or_investigation_2(action=None, success=None, container=None
     ## Custom Code End
     ################################################################################
 
-    phantom.act("refresh finding or investigation", parameters=parameters, name="refresh_finding_or_investigation_2", assets=["builtin_mc_connector"], callback=format_1)
+    phantom.act("refresh finding or investigation", parameters=parameters, name="refresh_finding_or_investigation_2", assets=["builtin_mc_connector"], callback=evaluation_results)
 
     return
 
