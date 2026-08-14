@@ -95,25 +95,17 @@ def list_finding_fields_1(action=None, success=None, container=None, results=Non
 
 
 @phantom.playbook_block()
-def set_custom_fields_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("set_custom_fields_4() called")
+def action_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("action_1() called")
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
-    finding_data = phantom.collect2(container=container, datapath=["finding:id"])
-    result_list__result_list = json.loads(_ if (_ := phantom.get_run_data(key="result_list:result_list")) != "" else "null")  # pylint: disable=used-before-assignment
-
     parameters = []
 
-    # build parameters list for 'set_custom_fields_4' call
-    for finding_data_item in finding_data:
-        if finding_data_item[0] is not None:
-            parameters.append({
-                "pairs": [
-                    { "name": "Datacenters", "value": result_list__result_list },
-                ],
-                "incident_id": finding_data_item[0],
-            })
+    parameters.append({
+        "pairs": "",
+        "incident_id": "",
+    })
 
     ################################################################################
     ## Custom Code Start
@@ -126,7 +118,7 @@ def set_custom_fields_4(action=None, success=None, container=None, results=None,
     ## Custom Code End
     ################################################################################
 
-    phantom.act("set custom fields", parameters=parameters, name="set_custom_fields_4", assets=["builtin_mc_connector"])
+    phantom.act("null", parameters=parameters, name="action_1")
 
     return
 
@@ -159,7 +151,7 @@ def result_list(action=None, success=None, container=None, results=None, handle=
 
     phantom.save_block_result(key="result_list_called", value="True")
 
-    set_custom_fields_4(container=container)
+    action_1(container=container)
 
     return
 

@@ -36,7 +36,7 @@
                 }
             ],
             "globalCustomCode": "\n\ndef result_csv(result_list):\n    simple_list = []\n    for item in result_list:\n        simple_list.append(item[0])\n    dedup = list(dict.fromkeys(simple_list))\n    return \", \".join(dedup)\n\n",
-            "hash": "5b22d454ffc59db9842a8cf0f1b16d9b5f0d67d6",
+            "hash": "2b5c36fe619321843bfee619f1cc8c1db0ba8b0d",
             "nodes": {
                 "0": {
                     "data": {
@@ -58,7 +58,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 920,
-                    "y": 199.99999999999977
+                    "y": 199.99999999999972
                 },
                 "1": {
                     "data": {
@@ -74,7 +74,7 @@
                     "type": "end",
                     "warnings": {},
                     "x": 1220,
-                    "y": 199.99999999999966
+                    "y": 199.9999999999996
                 },
                 "10": {
                     "data": {
@@ -233,25 +233,27 @@
                     "errors": {},
                     "id": "3",
                     "type": "utility",
-                    "warnings": {},
+                    "warnings": {
+                        "config": [
+                            "The referenced custom function has changed. Reconfigure this block to use the updated parameters."
+                        ]
+                    },
                     "x": 900,
                     "y": 340
                 },
                 "8": {
                     "data": {
-                        "action": "set custom fields",
-                        "actionType": "post",
+                        "action": null,
+                        "actionType": null,
                         "advanced": {
                             "join": []
                         },
-                        "connector": "Enterprise Security",
-                        "connectorConfigs": [
-                            "builtin_mc_connector"
-                        ],
-                        "connectorId": "7e971d03-6ae7-4429-b4e1-cf461003e75b",
-                        "connectorVersion": "v1",
-                        "functionId": 4,
-                        "functionName": "set_custom_fields_4",
+                        "connector": null,
+                        "connectorConfigs": [],
+                        "connectorId": null,
+                        "connectorVersion": null,
+                        "functionId": 1,
+                        "functionName": "action_1",
                         "id": "8",
                         "loop": {
                             "conditions": [
@@ -278,15 +280,7 @@
                             "pauseUnit": "m",
                             "pauseValue": 2
                         },
-                        "parameters": {
-                            "incident_id": "finding:id",
-                            "pairs": [
-                                {
-                                    "name": "Datacenters",
-                                    "value": "result_list:custom_function:result_list"
-                                }
-                            ]
-                        },
+                        "parameters": {},
                         "requiredParameters": [
                             {
                                 "data_type": "array",
@@ -311,9 +305,9 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 308,
-                "playbook_name": "zz_Start_Adv_Lab_5 | Locate Datacenters",
-                "playbook_repo_id": 6,
+                "playbook_id": 182,
+                "playbook_name": "zz_Solution_Adv_Lab_5 | Locate Datacenters",
+                "playbook_repo_id": 4,
                 "playbook_repo_name": "Advanced_Solutions"
             }
         },
@@ -325,7 +319,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-07-30T23:34:54.735993+00:00",
+    "create_time": "2026-08-14T23:02:02.536881+00:00",
     "draft_mode": false,
     "labels": [
         "es_soar_integration"
