@@ -115,10 +115,10 @@
             },
             "notes": "",
             "origin": {
-                "playbook_id": 193,
-                "playbook_name": "zz_Solution_Intro_Lab_7 | Start Infection Investigation",
-                "playbook_repo_id": 5,
-                "playbook_repo_name": "INTRO2"
+                "playbook_id": 192,
+                "playbook_name": "bb_Solution_Intro_Lab_7 | Start Infection Investigation",
+                "playbook_repo_id": 3,
+                "playbook_repo_name": "Intro_Solutions"
             }
         },
         "input_spec": [
