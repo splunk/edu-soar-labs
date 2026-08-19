@@ -11,13 +11,11 @@ from datetime import datetime, timedelta
 ################################################################################
 ## Global Custom Code Start
 ################################################################################
-
-
-
 def result_csv(result_list):
     simple_list = []
     for item in result_list:
-        simple_list.append(item[0])
+        if item[0]:
+            simple_list.append(item[0])
     dedup = list(dict.fromkeys(simple_list))
     return ", ".join(dedup)
 ################################################################################
