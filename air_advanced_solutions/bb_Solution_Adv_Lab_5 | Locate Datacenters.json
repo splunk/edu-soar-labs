@@ -36,7 +36,7 @@
                 }
             ],
             "globalCustomCode": "\n\ndef result_csv(result_list):\n    simple_list = []\n    for item in result_list:\n        simple_list.append(item[0])\n    dedup = list(dict.fromkeys(simple_list))\n    return \", \".join(dedup)\n\n",
-            "hash": "26638f44bc569304dc1c6eb1b0ea65347c232ed1",
+            "hash": "2b5c36fe619321843bfee619f1cc8c1db0ba8b0d",
             "nodes": {
                 "0": {
                     "data": {
@@ -330,7 +330,5 @@
     "labels": [
         "es_soar_integration"
     ],
-    "tags": [
-        "edu_air_advanced"
-    ]
+    "tags": []
 }
