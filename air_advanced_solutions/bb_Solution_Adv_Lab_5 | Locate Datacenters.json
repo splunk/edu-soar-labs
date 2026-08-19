@@ -36,7 +36,7 @@
                 }
             ],
             "globalCustomCode": "\n\ndef result_csv(result_list):\n    simple_list = []\n    for item in result_list:\n        simple_list.append(item[0])\n    dedup = list(dict.fromkeys(simple_list))\n    return \", \".join(dedup)\n\n",
-            "hash": "2b5c36fe619321843bfee619f1cc8c1db0ba8b0d",
+            "hash": "26638f44bc569304dc1c6eb1b0ea65347c232ed1",
             "nodes": {
                 "0": {
                     "data": {
@@ -58,7 +58,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 920,
-                    "y": 199.99999999999972
+                    "y": 199.99999999999966
                 },
                 "1": {
                     "data": {
@@ -73,8 +73,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1220,
-                    "y": 199.9999999999996
+                    "x": 920,
+                    "y": 940
                 },
                 "10": {
                     "data": {
@@ -160,7 +160,7 @@
                     "type": "action",
                     "warnings": {},
                     "x": 900,
-                    "y": 500
+                    "y": 480
                 },
                 "3": {
                     "data": {
@@ -233,27 +233,25 @@
                     "errors": {},
                     "id": "3",
                     "type": "utility",
-                    "warnings": {
-                        "config": [
-                            "The referenced custom function has changed. Reconfigure this block to use the updated parameters."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 900,
                     "y": 340
                 },
                 "8": {
                     "data": {
-                        "action": null,
-                        "actionType": null,
+                        "action": "set custom fields",
+                        "actionType": "post",
                         "advanced": {
                             "join": []
                         },
-                        "connector": null,
-                        "connectorConfigs": [],
-                        "connectorId": null,
-                        "connectorVersion": null,
+                        "connector": "Enterprise Security",
+                        "connectorConfigs": [
+                            "builtin_mc_connector"
+                        ],
+                        "connectorId": "7e971d03-6ae7-4429-b4e1-cf461003e75b",
+                        "connectorVersion": "v1",
                         "functionId": 1,
-                        "functionName": "action_1",
+                        "functionName": "set_custom_fields_1",
                         "id": "8",
                         "loop": {
                             "conditions": [
@@ -280,7 +278,15 @@
                             "pauseUnit": "m",
                             "pauseValue": 2
                         },
-                        "parameters": {},
+                        "parameters": {
+                            "incident_id": "finding:id",
+                            "pairs": [
+                                {
+                                    "name": "Datacenter",
+                                    "value": "result_list:custom_function:result_list"
+                                }
+                            ]
+                        },
                         "requiredParameters": [
                             {
                                 "data_type": "array",
@@ -319,7 +325,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-08-14T23:02:02.536881+00:00",
+    "create_time": "2026-08-19T21:22:39.768901+00:00",
     "draft_mode": false,
     "labels": [
         "es_soar_integration"
