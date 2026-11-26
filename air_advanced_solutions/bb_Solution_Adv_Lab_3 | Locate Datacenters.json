@@ -30,7 +30,7 @@
                 }
             ],
             "globalCustomCode": "def result_csv(result_list):\n    simple_list = []\n    for item in result_list:\n        if item[0]:\n            simple_list.append(item[0])\n    dedup = list(dict.fromkeys(simple_list))\n    return \", \".join(dedup)",
-            "hash": "631f3a4dcb49b8fe9406261393d5c46f3989f311",
+            "hash": "2853712e70114a11942173a3d5eeb5d63b28b161",
             "nodes": {
                 "0": {
                     "customCode": null,
@@ -53,7 +53,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 920,
-                    "y": 199.99999999999963
+                    "y": 199.99999999999957
                 },
                 "1": {
                     "customCode": null,
@@ -71,7 +71,7 @@
                     "userCode": "\n    # Write your custom code here...\n\n",
                     "warnings": {},
                     "x": 1220,
-                    "y": 205.99999999999966
+                    "y": 205.9999999999996
                 },
                 "5": {
                     "data": {
@@ -274,7 +274,7 @@
                     "errors": {},
                     "id": "7",
                     "type": "enterpriseSecurity",
-                    "userCode": "\n    # Write your custom code here...\n    \n    val = result_csv(geolocate_ip_1_result_data)\n    parameters = []\n    parameters.append({\"pairs\": [{\"name\": \"Datacenters\", \"value\": val },\n                       ],\n                       \"incident_id\": finding_data_item[0],\n                      })\n    \n    \n",
+                    "userCode": "\n    # Write your custom code here...\n\n",
                     "warnings": {},
                     "x": 900,
                     "y": 680
@@ -296,7 +296,7 @@
         "schema": "5.0.24",
         "version": "8.5.0.249"
     },
-    "create_time": "2026-08-19T18:08:52.141814+00:00",
+    "create_time": "2026-11-26T01:21:03.117089+00:00",
     "draft_mode": false,
     "labels": [
         "es_soar_integration"

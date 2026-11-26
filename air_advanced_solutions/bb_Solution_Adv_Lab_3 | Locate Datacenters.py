@@ -119,15 +119,7 @@ def set_custom_fields_3(action=None, success=None, container=None, results=None,
     ################################################################################
 
     # Write your custom code here...
-    
-    val = result_csv(geolocate_ip_1_result_data)
-    parameters = []
-    parameters.append({"pairs": [{"name": "Datacenters", "value": val },
-                       ],
-                       "incident_id": finding_data_item[0],
-                      })
-    
-    
+
     ################################################################################
     ## Custom Code End
     ################################################################################
